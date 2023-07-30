@@ -16,9 +16,11 @@
                 <label for="password">Please choose a password</label>
                 <br>
                 <textarea id="password" name="password_text_area" cols="30" rows="10" placeholder="Enter password here"></textarea>
-                <span class="error" id="message-error"></span>
-              </div>
-              <br>
+                <br>
+            </div>
+
+            <div id="response-message"></div>
+
         </div>
     </fieldset>
     </form>
@@ -38,8 +40,9 @@
             })
             .then(response => response.json())
             .then(data => {
-                // Update the error message on the page based on the server's response
-                document.getElementById("message-error").textContent = data.message;
+                // Update the response message dynamically
+                const responseMessageDiv = document.getElementById("response-message");
+                responseMessageDiv.textContent = data.message;
             })
             .catch(error => {
                 console.error('Error:', error);
