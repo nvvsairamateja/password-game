@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 
-app = Flask(__name__)
+app = Flask(__name__,)  #template_folder='C:\\Users\\nvvsa\\OneDrive\\Desktop\\Game projects\\PasswordGame\\password-game\\')
 
 @app.route('/')
 def index():
-    return render_template('pasword.html')
+    return render_template("pasword.html")
 
 @app.route('/check_password_strength', methods=['POST'])
 def check_password_strength():
