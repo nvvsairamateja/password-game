@@ -22,5 +22,29 @@
     </fieldset>
     </form>
 
+    <script>
+        // Add an event listener to the text area
+        document.getElementById("password").addEventListener("input", function() {
+            const password = this.value;
+
+            // Send the password to the server for processing
+            fetch('/check_password_strength', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'password=' + encodeURIComponent(password)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the error message on the page based on the server's response
+                document.getElementById("message-error").textContent = data.message;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+
 </body>
 </html>
