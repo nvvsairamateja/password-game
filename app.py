@@ -8,13 +8,21 @@ def index():
 
 @app.route('/check_password_strength', methods=['POST'])
 def check_password_strength():
-    password = request.form['password']
+    password = str(request.form['password'])
     password_length = len(password)
 
-    if password_length >= 8:
-        response = {'message': 'Password is strong!'}
+    if password_length >= 5:
+        if password.islower():
+            response = {'message': 'Your password must include an uppercase letter.'}
+        else:
+            if not any(chr.isdigit() for chr in password):
+                response = {'message': 'Your password must include a number.'}
+            else:
+                response = {'message': 'Password is strong!'}
     else:
-        response = {'message': 'Password is weak. It should be at least 8 characters long.'}
+        response = {'message': 'Your password must be at least 5 characters long.'}
+
+
 
     return jsonify(response)
 
